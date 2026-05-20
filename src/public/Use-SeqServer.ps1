@@ -12,7 +12,7 @@ https://getseq.net/
 Use-SeqServer.ps1 http://my-seq $apikey
 #>
 
-#requires -Version 4
+#Requires -Version 4
 [CmdletBinding()][OutputType([void])] Param(
 # The URL of the Seq server.
 [Parameter(Mandatory=$true)][uri] $Server,
