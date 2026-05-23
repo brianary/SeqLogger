@@ -6,7 +6,7 @@ Sends an event (often an error) from a script to a Seq server, including script 
 Seq
 
 .LINK
-Send-SeqEvent.ps1
+Send-SeqEvent
 
 .LINK
 https://getseq.net/
@@ -15,7 +15,6 @@ https://getseq.net/
 try { Connect-Thing } catch { Send-SeqScriptEvent.ps1 'Trying to connect' $_ -Level Error -Server http://my-seq }
 #>
 
-#Requires -Version 3
 [CmdletBinding()][OutputType([void])] Param(
 # A description of what was being attempted.
 [Parameter(Position=0,Mandatory=$true)][string]$Action,
@@ -68,4 +67,4 @@ else
     [void]$SeqEvent.Add('Message','{Script}: {Action}')
 }
 [void]$SeqEvent.Add('Properties',$Properties)
-Send-SeqEvent.ps1 @SeqEvent
+Send-SeqEvent @SeqEvent -WarningAction Ignore

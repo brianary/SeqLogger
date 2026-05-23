@@ -12,7 +12,6 @@ https://getseq.net/
 Use-SeqServer.ps1 http://my-seq $apikey
 #>
 
-#Requires -Version 4
 [CmdletBinding()][OutputType([void])] Param(
 # The URL of the Seq server.
 [Parameter(Mandatory=$true)][uri] $Server,
@@ -22,8 +21,8 @@ Use-SeqServer.ps1 http://my-seq $apikey
 
 Write-Verbose "Using Seq at $Server"
 $value = @{
-    'Send-SeqEvent.ps1:Server' = $Server
-    'Send-SeqEvent.ps1:ApiKey' = $ApiKey
+    'Send-SeqEvent:Server' = $Server
+    'Send-SeqEvent:ApiKey' = $ApiKey
 }
 $defaults = Get-Variable -Scope 1 -Name PSDefaultParameterValues -EA SilentlyContinue
 if($defaults) {$value.Keys |Where-Object {$defaults.Value.Contains($_)} |ForEach-Object {$defaults.Value.Remove($_)}; $defaults.Value += $value}

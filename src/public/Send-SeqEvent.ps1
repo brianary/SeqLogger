@@ -18,16 +18,15 @@ Invoke-RestMethod
 https://getseq.net/
 
 .EXAMPLE
-Send-SeqEvent.ps1 'Hello from PowerShell' -Server http://my-seq -LiteralMessage
+Send-SeqEvent 'Hello from PowerShell' -Server http://my-seq -LiteralMessage
 
 .EXAMPLE
-Send-SeqEvent.ps1 'Event: {User} on {Machine}' @{ User = $env:UserName; Machine = $env:ComputerName } -Server http://my-seq
+Send-SeqEvent 'Event: {User} on {Machine}' @{ User = $env:UserName; Machine = $env:ComputerName } -Server http://my-seq
 
 .EXAMPLE
-Send-SeqEvent.ps1 -Properties @{ Message = $Error[0].Exception.Message } -Level Error -Server http://my-seq
+Send-SeqEvent -Properties @{ Message = $Error[0].Exception.Message } -Level Error -Server http://my-seq
 #>
 
-#requires -Version 4
 [CmdletBinding()][OutputType([void])] Param(
 <#
 The text to use as the log message, a Seq template unless -LiteralMessage is present.
@@ -53,18 +52,10 @@ Information by default.
 )
 Process
 {
-    if($Properties -is [hashtable]) {}
-    elseif($Properties -is [Collections.Specialized.OrderedDictionary]) {}
-    elseif($Properties -is [Data.DataRow]) {$Properties = ConvertFrom-DataRow.ps1 $Properties -AsHashtable}
-    else {$Properties = ConvertTo-OrderedDictionary.ps1 $Properties}
-
     if($LiteralMessage) { $Properties += @{Message=$Message}; $Message = "{Message}" }
 
-    @{
-        Uri         = New-Object uri ([uri]$Server,"/api/events/raw?apiKey=$ApiKey")
-        Method      = 'POST'
-        ContentType = 'application/json'
-        Body        = @{
+	Invoke-RestMethod -Uri (New-Object uri ([uri]$Server,"/api/events/raw?apiKey=$ApiKey")) `
+		-Method POST -ContentType application/json -Body (@{
             Events  = @(
                 @{
                     Timestamp       = Get-Date -Format o
@@ -73,6 +64,5 @@ Process
                     Properties      = $Properties
                 }
             )
-        } |ConvertTo-Json -Depth 5 -Compress
-    } |ForEach-Object {Invoke-RestMethod @_ |Write-Verbose}
+		} |ConvertTo-Json -Depth 5 -Compress) |Write-Verbose
 }

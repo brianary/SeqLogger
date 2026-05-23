@@ -9,7 +9,7 @@
 [![Actions Status](https://github.com/brianary/SeqLogger/actions/workflows/continuous.yml/badge.svg)](https://github.com/brianary/SeqLogger/actions/workflows/continuous.yml)
 [![Mastodon: @dataelemental@mastodon.social](https://badgen.net/badge/@dataelemental/@mastodon.social/blue?icon=mastodon)](https://mastodon.social/@dataelemental "DataElemental Mastodon profile")
 
-Commands to send structure log events to a Seq server.
+Commands to send structured log events to a Seq server.
 
 <img src="images/demo.gif" alt="a demonstration of the module commands" height="300" width="600" />
 
