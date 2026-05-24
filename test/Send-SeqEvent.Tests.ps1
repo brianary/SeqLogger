@@ -27,7 +27,7 @@ Describe 'Send-SeqEvent' -Tag Send-SeqEvent,Send,SeqEvent {
 				-Server http://jacklumber.example.com
 			Should -Invoke -ModuleName SeqLogger -CommandName Invoke-RestMethod
 		}
-		It "should send a structure error message" {
+		It "should send a structured error message" {
 			Send-SeqEvent -Properties @{ Message = $Error[0].Exception.Message } -Level Error `
 				-Server http://audit.example.net
 			Should -Invoke -ModuleName SeqLogger -CommandName Invoke-RestMethod
