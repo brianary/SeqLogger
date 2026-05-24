@@ -13,12 +13,11 @@ BeforeAll {
 }
 Describe 'Use-SeqServer' -Tag Use-SeqServer,Use,SeqServer {
 	Context 'Set the default Server and ApiKey for Send-SeqEvent.ps1' {
-		It "should set the default params, server '<Server>' and ApiKey '<ApiKey>'" -Skip -TestCases @(
+		It "should set the default params, server '<Server>' and ApiKey '<ApiKey>'" -TestCases @(
 			@{ Server = 'http://logs.example.org'; ApiKey = "$(New-Guid)" }
 		) {
 			Param([uri]$Server,[string]$ApiKey)
 			Use-SeqServer -Server $Server -ApiKey $ApiKey
-			$PSDefaultParameterValues |Out-String |Write-Warning
 			$PSDefaultParameterValues.ContainsKey('Send-SeqEvent:Server') |
 				Should -BeTrue -Because 'default Seq server should be set'
 			$PSDefaultParameterValues['Send-SeqEvent:Server'] |
