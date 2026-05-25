@@ -15,13 +15,13 @@ FunctionsToExport = @('*') # '*'
 CmdletsToExport = @() # '*'
 VariablesToExport = @() # '*'
 # AliasesToExport = @()
-FileList = @('ModernConveniences.psd1','ModernConveniences.psm1')
+FileList = @('SeqLogger.psd1','SeqLogger.psm1')
 PrivateData = @{
 	PSData = @{
 		Tags = @('Seq', 'Log', 'Logging', 'Logger')
-		LicenseUri = 'https://github.com/brianary/ModernConveniences/blob/master/LICENSE'
-		ProjectUri = 'https://github.com/brianary/ModernConveniences/'
-		IconUri = 'http://webcoder.info/images/ModernConveniences.svg'
+		LicenseUri = 'https://github.com/brianary/SeqLogger/blob/master/LICENSE'
+		ProjectUri = 'https://github.com/brianary/SeqLogger/'
+		IconUri = 'http://webcoder.info/images/SeqLogger.svg'
 		# ReleaseNotes = ''
 		# PS7: A list of external modules that this module is dependent upon.
 		# ExternalModuleDependencies = ,'Microsoft.PowerShell.Utility'
